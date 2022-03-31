@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model List<Bowler>
+
+<div class="row m-1 p-1">
+    <div id="teams" class="col-3">
+        <a asp-controller="Home" asp-action="Index" asp-route-teamId="" asp-route-teamName="" class="btn btn-block @(ViewBag.SelectedTeam == null ? "btn-primary" : "btn-outline-secondary")">All</a>
+        @foreach (var t in ViewBag.Teams)
+        {
+            <a asp-controller="Home" asp-action="Index" asp-route-teamId="@t.TeamID" asp-route-teamName="@t.TeamName" class="btn btn-block btn-outline-secondary @(ViewBag.SelectedTeam == t.TeamID ? "btn-primary" : "btn-outline-secondary")">@t.TeamName</a>
+        }
+    </div>
+    <div class="col-9">
+        <h2>@(ViewBag.SelectedTeamName == null? "All Bowlers" : ViewBag.SelectedTeamName)</h2>
+
+        @foreach (var b in Model)
+        {
+            <div class="card card-outline-primary m-1 p-1">
+                <div class="bg-faded p-1">
+                    <h4>
+                        @b.BowlerFirstName @b.BowlerMiddleInit@(b.BowlerMiddleInit!= null?".":"") @b.BowlerLastName
+                        <span class="badge badge-pill badge-primary" style="float:right">
+                            <small>@b.Team.TeamName</small>
+                        </span>
+                    </h4>
+                </div>
+                <div class="card-text p-1">
+                    <h6>Contact Information</h6>
+                    <ul style="list-style-type:none;">
+                        <li>Phone: @b.BowlerPhoneNumber</li>
+                        <li>@b.BowlerAddress</li>
+                        <li>@b.BowlerCity, @b.BowlerState</li>
+                        <li>@b.BowlerZip</li>
+                    </ul>
+                </div>                
+
+                <span class="card-text">
+                    <a asp-controller="Home" asp-action="Delete" asp-route-bowlerId="@b.BowlerID" class="btn btn-danger btn-sm float-right m-2">Delete</a>
+                    <a asp-controller="Home" asp-action="Edit" asp-route-bowlerId="@b.BowlerID" class="btn btn-warning btn-sm float-right m-2">Edit</a>
+
+
+                </span>
+
+            </div>
+        }
+    </div>
+</div>
+

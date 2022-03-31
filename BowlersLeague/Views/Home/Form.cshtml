@@ -1,0 +1,56 @@
+﻿
+@{
+}
+@model Bowler
+
+
+
+<div class="row justify-content-center">
+    <div class="col-5">
+
+        <h2>@ViewBag.Title</h2>
+
+        <form method="post" class="p-2">
+
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <input asp-for="BowlerID" hidden />
+
+            <label asp-for="BowlerFirstName">First Name:</label>
+            <input asp-for="BowlerFirstName" class="form-control" />
+
+            <label asp-for="BowlerLastName">Last Name:</label>
+            <input asp-for="BowlerLastName" class="form-control" />
+
+            <label asp-for="BowlerMiddleInit">Middle Initial:</label>
+            <input asp-for="BowlerMiddleInit" class="form-control" />
+
+            <label asp-for="BowlerAddress">Address:</label>
+            <input asp-for="BowlerAddress" class="form-control" />
+
+            <label asp-for="BowlerCity">City:</label>
+            <input asp-for="BowlerCity" class="form-control" />
+
+            <label asp-for="BowlerState">State:</label>
+            <input asp-for="BowlerState" class="form-control" />
+
+            <label asp-for="BowlerZip">ZIP:</label>
+            <input asp-for="BowlerZip" class="form-control" />
+
+            <label asp-for="BowlerPhoneNumber">Phone Number:</label>
+            <input asp-for="BowlerPhoneNumber" class="form-control" />
+
+            <label asp-for="TeamID">Team:</label>
+            <select asp-for="TeamID" class="form-control">
+                <option value="">--Select a Team--</option>
+                @foreach (var t in ViewBag.Teams)
+                {
+                    <option value="@t.TeamID">@t.TeamName</option>
+                }
+            </select>
+            <br />
+            <button type="submit" class="btn btn-secondary">Submit</button>
+            <br />
+        </form>
+    </div>
+</div>
